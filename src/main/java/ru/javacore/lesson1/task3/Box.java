@@ -33,8 +33,8 @@ public class Box<T extends Fruit> {
      * @param name   имя ящика
      * @param count  количество фруктов
      * @param weight вес одного фрукта
-     * @throws IllegalAccessException
-     * @throws InstantiationException
+     * @throws IllegalAccessException исключение
+     * @throws InstantiationException исключение
      */
     public Box(Class<T> c, String name, int count, float weight) throws IllegalAccessException, InstantiationException {
         this.name = name;

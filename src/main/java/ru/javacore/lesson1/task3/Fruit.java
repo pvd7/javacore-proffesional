@@ -8,18 +8,18 @@ package ru.javacore.lesson1.task3;
 abstract class Fruit {
     private float weight;
 
-    public Fruit() {
+    Fruit() {
     }
 
-    public Fruit(float weight) {
+    Fruit(float weight) {
         this.weight = weight;
     }
 
-    public float getWeight() {
+    float getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    void setWeight(float weight) {
         this.weight = weight;
     }
 }
