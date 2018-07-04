@@ -6,7 +6,10 @@
 package ru.javacore.lesson1.task3;
 
 abstract class Fruit {
-    float weight;
+    private float weight;
+
+    public Fruit() {
+    }
 
     public Fruit(float weight) {
         this.weight = weight;
