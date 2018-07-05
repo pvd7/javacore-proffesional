@@ -87,12 +87,11 @@ public class Box<T extends Fruit> {
      * @param another другой ящик
      * @return другой яшик
      */
-    public Box<T> moveTo(Box<T> another) {
+    public void moveTo(Box<T> another) {
         for (T fruit : list) {
             another.add(fruit);
         }
         list.clear();
-        return another;
     }
 
     public String getName() {
