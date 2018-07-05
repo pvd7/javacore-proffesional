@@ -14,7 +14,7 @@ import java.util.List;
  * @param <T> параметр-тип
  */
 public class Box<T extends Fruit> {
-    private final List<T> fruits = new ArrayList<>();
+    private final List<T> list = new ArrayList<>();
     private final String name;
 
     /**
@@ -42,16 +42,16 @@ public class Box<T extends Fruit> {
         for (int i = 0; i < count; i++) {
             t = c.newInstance();
             t.setWeight(weight);
-            fruits.add(t);
+            list.add(t);
         }
     }
 
-    public List<T> getFruits() {
-        return fruits;
+    public List<T> getList() {
+        return list;
     }
 
-    public void add(T fruit) {
-        fruits.add(fruit);
+    public void add(T value) {
+        list.add(value);
     }
 
     /**
@@ -61,14 +61,14 @@ public class Box<T extends Fruit> {
      */
     public float getWeight() {
         float sum = 0.0f;
-        for (Fruit fruit : fruits) {
+        for (Fruit fruit : list) {
             sum += fruit.getWeight();
         }
         return sum;
     }
 
     public int getCount() {
-        return fruits.size();
+        return list.size();
     }
 
     /**
@@ -88,10 +88,10 @@ public class Box<T extends Fruit> {
      * @return другой яшик
      */
     public Box<T> moveTo(Box<T> another) {
-        for (T fruit : fruits) {
+        for (T fruit : list) {
             another.add(fruit);
         }
-        fruits.clear();
+        list.clear();
         return another;
     }
 

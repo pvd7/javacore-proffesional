@@ -73,6 +73,7 @@ public class App {
 
         // создаем новый ящик и перемещаем в него фрукты из другого ящика
         Box<Apple> appleBox3 = new Box<>("яблоки3");
+        out.println(appleBox1.getName() + " пересыпаем в " + appleBox3.getName());
         appleBox1.moveTo(appleBox3);
         out.println(appleBox1);
         out.println(appleBox3);
