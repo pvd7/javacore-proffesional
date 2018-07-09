@@ -27,14 +27,16 @@ public class Product {
         String createIndexProductPrice = "CREATE INDEX IF NOT EXISTS index_product_price ON products (price);";
         String createIndexProductProdId = "CREATE INDEX IF NOT EXISTS index_product_prodId ON products (prodId);";
         String createIndexProductTitle = "CREATE INDEX IF NOT EXISTS index_product_title ON products (title);";
-        String clearProducts = "DELETE FROM products;";
+//        String clearProducts = "DELETE FROM products;";
+        String dropTableProduct = "DROP TABLE IF EXISTS products;";
 
         Statement statement = connection.createStatement();
+        statement.execute(dropTableProduct);
         statement.execute(createProducts);
         statement.execute(createIndexProductPrice);
         statement.execute(createIndexProductProdId);
         statement.execute(createIndexProductTitle);
-        statement.execute(clearProducts);
+//        statement.execute(clearProducts);
     }
 
     /**
