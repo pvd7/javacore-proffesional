@@ -9,7 +9,7 @@ import org.sqlite.JDBC;
 import ru.javacore.lesson2.entity.ConsoleCommand;
 import ru.javacore.lesson2.entity.Product;
 
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,18 +20,18 @@ public class App {
     public static void main(String[] args) throws SQLException {
         final String DB_PATH = "../test.db";
 
-        Connection conn = DriverManager.getConnection(JDBC.PREFIX + DB_PATH);
+        Connection connection = DriverManager.getConnection(JDBC.PREFIX + DB_PATH);
         try {
-//            Product.create(conn);
-//            Product.fill(conn);
-
-
+            Product.create(connection);
+            Product.fill(connection);
+            ConsoleCommand.print();
 
             String nextLine;
             String strCommand;
-            PrintWriter printWriter = new PrintWriter(System.out, true);
+            PrintStream out = System.out;
             Scanner scanner = new Scanner(System.in);
             while (true) {
+                out.print("cmd>");
                 nextLine = scanner.nextLine();
                 for (ConsoleCommand consoleCommand : ConsoleCommand.values()) {
                     strCommand = consoleCommand.getName();
@@ -41,29 +41,25 @@ public class App {
                             case HELP:
                                 ConsoleCommand.print();
                                 break;
-                            case COST:
-                                Product.printByTitle(conn, nextLine.split(" "));
+                            case PRICE:
+                                Product.printByTitle(connection, nextLine.split(" "));
                                 break;
-                            case COST_CHANGE:
-                                Product.changeCost(conn, nextLine.split(" "));
+                            case CHANGE_PRICE:
+                                Product.changePrice(connection, nextLine.split(" "));
                                 break;
-                            case COST_FIND:
-                                Product.printByCost(conn, nextLine.split(" "));
+                            case FIND_PRICE:
+                                Product.findByPrice(connection, nextLine.split(" "));
                                 break;
                             case QUIT:
-                                printWriter.println("by by :)");
+                                out.println("by by :)");
                                 System.exit(0);
                                 break;
                         }
                     }
                 }
             }
-
-
-//            System.out.println();
-//            Product.printByCost(conn, 20, 30);
         } finally {
-            conn.close();
+            connection.close();
         }
     }
 
