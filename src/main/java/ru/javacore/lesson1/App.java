@@ -45,8 +45,8 @@ public class App {
         // задача про фрукты и коробки
         out.println("Фрукты и коробки");
 
-        float weightApple = 1.0f;
-        float weightOrange = 1.5f;
+        final float weightApple = 1.0f;
+        final float weightOrange = 1.5f;
 
         Box<Apple> appleBox1 = new Box<>("яблоки1");
         for (int i = 0; i < 15; i++) appleBox1.add(new Apple(weightApple));
