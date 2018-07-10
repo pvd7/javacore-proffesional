@@ -51,16 +51,20 @@ public class Product {
 
         String sql = "INSERT INTO products (prodId, title, price) VALUES (?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
-        for (int i = 1; i <= PRODUCT_COUNT; i++) {
-            statement.setInt(1, i);
-            statement.setString(2, "товар" + i);
-            statement.setInt(3, i * 10);
-            statement.addBatch();
-        }
-        statement.executeBatch();
-        connection.commit();
+        try {
+            for (int i = 1; i <= PRODUCT_COUNT; i++) {
+                statement.setInt(1, i);
+                statement.setString(2, "товар" + i);
+                statement.setInt(3, i * 10);
+                statement.addBatch();
+            }
+            statement.executeBatch();
+            connection.commit();
 
-        connection.setAutoCommit(autoCommit);
+            connection.setAutoCommit(autoCommit);
+        } finally {
+            statement.close();
+        }
     }
 
     /**
@@ -84,14 +88,13 @@ public class Product {
     public static void printByTitle(Connection connection, String title) throws SQLException {
         String sql = "SELECT * FROM products WHERE title = ?";
 
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, title);
-
-        ResultSet resultSet = statement.executeQuery();
+        PreparedStatement query = connection.prepareStatement(sql);
         try {
+            query.setString(1, title);
+            ResultSet resultSet = query.executeQuery();
             printFormat(resultSet);
         } finally {
-            resultSet.close();
+            query.close();
         }
     }
 
@@ -142,18 +145,21 @@ public class Product {
      *
      * @param connection подвлючение к БД
      * @param title      наименование товара
-     * @param price       новая цена
+     * @param price      новая цена
      * @throws SQLException исключение
      */
     public static void changePrice(Connection connection, String title, int price) throws SQLException {
         String sql = "UPDATE products SET price = ? WHERE title = ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
+        PreparedStatement query = connection.prepareStatement(sql);
+        try {
+            query.setObject(1, price);
+            query.setObject(2, title);
 
-        statement.setObject(1, price);
-        statement.setObject(2, title);
-
-        int count = statement.executeUpdate();
-        System.out.println("rows affected " + count);
+            int count = query.executeUpdate();
+            System.out.println("rows affected " + count);
+        } finally {
+            query.close();
+        }
     }
 
     /**
@@ -179,13 +185,15 @@ public class Product {
      */
     public static void findByPrice(Connection connection, int priceFrom, int priceTo) throws SQLException {
         String sql = "SELECT * FROM products WHERE price BETWEEN ? and ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-
-        statement.setObject(1, priceFrom);
-        statement.setObject(2, priceTo);
-
-        ResultSet resultSet = statement.executeQuery();
-        printFormat(resultSet);
+        PreparedStatement query = connection.prepareStatement(sql);
+        try {
+            query.setObject(1, priceFrom);
+            query.setObject(2, priceTo);
+            ResultSet resultSet = query.executeQuery();
+            printFormat(resultSet);
+        } finally {
+            query.close();
+        }
     }
 
 }
