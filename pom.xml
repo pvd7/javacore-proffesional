@@ -45,7 +45,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>ru.gb.lesson2.App</mainClass>
+                            <mainClass>ru.javacore.lesson3.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
