@@ -3,7 +3,7 @@
  * @author Pavel Dymov
  */
 
-package ru.javacore.lesson4.task1;
+package ru.javacore.lesson4.printqueue;
 
 /**
  * Выводит в консоль строки в заданном порядке

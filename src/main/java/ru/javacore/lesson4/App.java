@@ -5,8 +5,8 @@
 
 package ru.javacore.lesson4;
 
-import ru.javacore.lesson4.task1.Controller;
-import ru.javacore.lesson4.task1.PrintString;
+import ru.javacore.lesson4.printqueue.Controller;
+import ru.javacore.lesson4.printqueue.PrintString;
 
 public class App {
 
@@ -18,5 +18,6 @@ public class App {
         new PrintString(controller, "B", 2);
         new PrintString(controller, "C", 3);
     }
+
 
 }
