@@ -10,6 +10,15 @@ package ru.javacore.lesson4.printqueue;
  */
 public class PrintString implements Runnable {
 
+    public static void main(String[] args) {
+        // 1. Создать три потока, каждый из которых выводит определенную букву (A, B и C) 5 раз (порядок
+        //– ABСABСABС). Используйте wait/notify/notifyAll.
+        Controller controller = new Controller(3);
+        new PrintString(controller, "A", 1);
+        new PrintString(controller, "B", 2);
+        new PrintString(controller, "C", 3);
+    }
+
     private final Controller controller;
     private final String str;
     private final int order;
