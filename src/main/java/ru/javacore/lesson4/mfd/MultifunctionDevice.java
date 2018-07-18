@@ -14,12 +14,13 @@ public class MultifunctionDevice {
         mfd.print(10);
         mfd.print(5);
         mfd.scan(15);
+        mfd.scan(11);
     }
 
     private final AtomicInteger printPageCount = new AtomicInteger(0);
     private final AtomicInteger scanPageCount = new AtomicInteger(0);
 
-    public MultifunctionDevice() {
+    private MultifunctionDevice() {
         // принтер
         Thread printer = new Thread(this::doSameWork, "printer");
         printer.start();
@@ -57,7 +58,7 @@ public class MultifunctionDevice {
         }
     }
 
-    public void print(int pageCount) {
+    private void print(int pageCount) {
         if (printPageCount.get() == 0) {
             printPageCount.set(pageCount);
         } else {
@@ -65,7 +66,7 @@ public class MultifunctionDevice {
         }
     }
 
-    public void scan(int pageCount) {
+    private void scan(int pageCount) {
         if (scanPageCount.get() == 0) {
             scanPageCount.set(pageCount);
         } else {
