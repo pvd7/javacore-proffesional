@@ -17,11 +17,11 @@ public class App {
     public static void main(String[] args) throws IOException, InterruptedException {
         // 1. Создать три потока, каждый из которых выводит определенную букву (A, B и C) 5 раз (порядок
         //– ABСABСABС). Используйте wait/notify/notifyAll.
-//        PrintString.main(null);
+        PrintString.main(null);
 
         // 2. Написать небольшой метод, в котором 3 потока построчно пишут данные в файл (по 10
         // записей с периодом в 20 мс).
-//        threadsWriteToFile();
+        threadsWriteToFile();
 
         //3. Написать класс МФУ, на котором возможно одновременно выполнять печать и сканирование
         //документов, но нельзя одновременно печатать или сканировать два документа. При печати в
