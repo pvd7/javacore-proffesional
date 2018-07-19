@@ -4,8 +4,8 @@
  */
 
 package ru.javacore.lesson5.entity;
-import ru.javacore.lesson5.App;
 
+import ru.javacore.lesson5.App;
 import java.util.concurrent.CyclicBarrier;
 
 public class Car implements Runnable {
