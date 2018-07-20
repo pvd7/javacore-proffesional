@@ -5,14 +5,12 @@
 
 package ru.javacore.lesson5.entity;
 
-import ru.javacore.lesson5.App;
-
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class Tunnel extends Stage {
 
-    private static final Semaphore SEMAPHORE = new Semaphore(App.CARS_COUNT / 2);
+    private final Semaphore semaphore = new Semaphore(Race.CARS_COUNT / 2);
 
     public Tunnel() {
         this.length = 80;
@@ -23,19 +21,18 @@ public class Tunnel extends Stage {
     public void go(Car c) {
         try {
             try {
-                if (!SEMAPHORE.tryAcquire(100, TimeUnit.MILLISECONDS)) {
+                if (!semaphore.tryAcquire(100, TimeUnit.MILLISECONDS)) {
                     System.out.println(c.getName() + " готовится к этапу(ждет): " + description);
-                    SEMAPHORE.acquire();
+                    semaphore.acquire();
                 }
                 System.out.println(c.getName() + " начал этап: " + description);
                 Thread.sleep(length / c.getSpeed() * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                System.out.println(c.getName() + " закончил этап: " +
-                        description);
+                System.out.println(c.getName() + " закончил этап: " + description);
+                semaphore.release();
             }
-            SEMAPHORE.release();
         } catch (Exception e) {
             e.printStackTrace();
         }
