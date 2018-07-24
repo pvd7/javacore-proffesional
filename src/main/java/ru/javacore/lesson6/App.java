@@ -5,12 +5,14 @@
 
 package ru.javacore.lesson6;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.Arrays;
 
 public class App {
-
-    public static void main(String[] args) {
-    }
 
     public static int[] split(int[] arr) {
         final int split = 4;
