@@ -5,20 +5,26 @@
 
 package ru.javacore.utils;
 
+import java.util.Scanner;
+
 public class StringUtils {
 
+    public static String getFirstWord(String str, String split) {
+        if (!isEmpty(str)) {
+            int i;
+            if ((i = str.indexOf(split)) != -1) {
+                return str.substring(0, i);
+            }
+        }
+        return str;
+    }
+
     public static String getFirstWord(String str) {
-        int i;
-        return ((i = str.indexOf(" ")) == -1) ? str : str.substring(0, i);
-//        int i = str.indexOf(" ");
-//        if (i == -1) {
-//            return str;
-//        } else {
-//            return str.substring(0, i);
-//        }
+        return getFirstWord(str, " ");
     }
 
     public static boolean isEmpty(String str) {
         return (str == null) || str.equals("");
     }
+
 }
