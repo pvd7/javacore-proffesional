@@ -5,11 +5,6 @@
 
 package ru.javacore.lesson6;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
 import java.util.Arrays;
 
 public class App {
@@ -17,13 +12,11 @@ public class App {
     public static int[] split(int[] arr) {
         final int split = 4;
         int len = arr.length;
-
         for (int i = len - 1; i >= 0; i--) {
             if (arr[i] == split) {
                 return Arrays.copyOfRange(arr, i + 1, len);
             }
         }
-
         throw new RuntimeException(split + " not found");
     }
 
