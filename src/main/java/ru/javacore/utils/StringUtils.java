@@ -5,8 +5,6 @@
 
 package ru.javacore.utils;
 
-import java.util.Scanner;
-
 public class StringUtils {
 
     public static String getFirstWord(String str, String split) {
