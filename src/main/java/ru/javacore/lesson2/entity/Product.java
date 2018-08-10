@@ -36,7 +36,7 @@ public class Product {
         statement.execute(createIndexProductPrice);
         statement.execute(createIndexProductProdId);
         statement.execute(createIndexProductTitle);
-//        statement.execute(clearProducts);
+//        statement.run(clearProducts);
     }
 
     /**

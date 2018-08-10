@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class AppTest {
+
     @Test
     public void split() {
         Assert.assertArrayEquals(new int[]{5, 6}, App.split(new int[]{1, 3, 4, 5, 6}));

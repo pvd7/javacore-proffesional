@@ -5,14 +5,12 @@
 
 package ru.javacore.lesson6.entity;
 
-import lombok.Getter;
-
 import java.sql.*;
 import java.util.Objects;
 
 public class Student {
 
-    @Getter
+//    @Getter
     private int id;
     private String name;
     private int rating;

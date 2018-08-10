@@ -5,32 +5,19 @@
 
 package ru.javacore.lesson6;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
 import java.util.Arrays;
 
 public class App {
 
     public static int[] split(int[] arr) {
         final int split = 4;
-        int splitIndex = 0;
-        boolean find = false;
         int len = arr.length;
-
         for (int i = len - 1; i >= 0; i--) {
             if (arr[i] == split) {
-                find = true;
-                splitIndex = i;
-                break;
+                return Arrays.copyOfRange(arr, i + 1, len);
             }
         }
-
-        if (!find) throw new RuntimeException(split + " not found");
-
-        return Arrays.copyOfRange(arr, splitIndex + 1, len);
+        throw new RuntimeException(split + " not found");
     }
 
     public static boolean check(int[] arr) {
