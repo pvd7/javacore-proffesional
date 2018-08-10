@@ -51,4 +51,8 @@ public class AppTest {
         log.info("test0");
     }
 
+    @Test(priority = 4)
+    public void test4() {
+        log.info("test4");
+    }
 }

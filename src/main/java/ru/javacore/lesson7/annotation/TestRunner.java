@@ -25,7 +25,11 @@ public class TestRunner {
     public static void run(Class<?> cls) {
         Method beforeSuite = null;
         Method afterSuite = null;
-        final Map<Method, Integer> testMethods = new HashMap<>();
+        final SortedSet<Map.Entry<Method, Integer>> sortedSet = new TreeSet<>((o1, o2) -> {
+            int compare = o1.getValue().compareTo(o2.getValue());
+            if (compare == 0) return o1.getKey().getName().compareTo(o2.getKey().getName());
+            else return compare;
+        });
 
         // находим методы с аннотациями
         Method[] methods = cls.getMethods();
@@ -34,22 +38,20 @@ public class TestRunner {
             afterSuite = getSingletonAnnotation(method, AfterSuite.class, afterSuite);
 
             Test test = method.getAnnotation(Test.class);
-            if (test != null) testMethods.put(method, test.priority());
+            if (test != null) sortedSet.add(new AbstractMap.SimpleEntry<>(method, test.priority()));
         }
 
         // запускаем методы
         try {
             Object obj = cls.newInstance();
             if (beforeSuite != null) beforeSuite.invoke(obj, (Object[]) beforeSuite.getParameters());
-            testMethods.entrySet().stream()
-                    .sorted(Map.Entry.comparingByValue())
-                    .forEach(e -> {
-                        try {
-                            e.getKey().invoke(obj, (Object[]) e.getKey().getParameters());
-                        } catch (IllegalAccessException | InvocationTargetException e1) {
-                            e1.printStackTrace();
-                        }
-                    });
+            sortedSet.forEach(e -> {
+                try {
+                    e.getKey().invoke(obj, (Object[]) e.getKey().getParameters());
+                } catch (IllegalAccessException | InvocationTargetException e1) {
+                    e1.printStackTrace();
+                }
+            });
             if (afterSuite != null) afterSuite.invoke(obj, (Object[]) afterSuite.getParameters());
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
